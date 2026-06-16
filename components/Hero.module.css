@@ -5,8 +5,11 @@
 .hero {
   position: relative;
   width: 100vw;
-  height: 100dvh;
-  overflow: hidden;
+  /* Use min-height so content below can scroll into view */
+  height: 100vh;
+  min-height: 100svh;
+  /* overflow: hidden only clips child absolute elements, not the page scroll */
+  overflow: clip;
   background: #070707;
   display: flex;
   align-items: center;
