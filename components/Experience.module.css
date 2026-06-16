@@ -1,0 +1,198 @@
+/* ─── Experience Section ─────────────────────────────────────────────────── */
+.experience {
+  background: #070707;
+  width: 100%;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 7rem 2rem;
+}
+
+/* ─── Header ─────────────────────────────────────────────────────────────── */
+.header {
+  text-align: center;
+  margin-bottom: 5rem;
+}
+
+.eyebrow {
+  display: inline-block;
+  font-size: 0.7rem;
+  letter-spacing: 0.3em;
+  color: #ff6b35;
+  text-transform: uppercase;
+  margin-bottom: 1rem;
+  font-weight: 600;
+}
+
+.title {
+  font-size: clamp(2rem, 5vw, 3.2rem);
+  font-weight: 800;
+  color: #ffffff;
+  margin: 0;
+  line-height: 1.15;
+}
+
+/* ─── Timeline wrapper ───────────────────────────────────────────────────── */
+.timeline {
+  position: relative;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+/* Vertical orange line */
+.line {
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 2px;
+  background: linear-gradient(
+    to bottom,
+    transparent 0%,
+    #ff6b35 8%,
+    #ff6b35 92%,
+    transparent 100%
+  );
+  border-radius: 1px;
+}
+
+/* ─── Entries container ──────────────────────────────────────────────────── */
+.entries {
+  display: flex;
+  flex-direction: column;
+  gap: 3.5rem;
+}
+
+/* ─── Single entry ───────────────────────────────────────────────────────── */
+.entry {
+  position: relative;
+  padding-left: 3rem;
+}
+
+/* Dot on the vertical line */
+.dot {
+  position: absolute;
+  left: -6px;
+  top: 0.35rem;
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: #ff6b35;
+  border: 2px solid #070707;
+  box-shadow: 0 0 0 3px rgba(255, 107, 53, 0.25);
+  z-index: 1;
+}
+
+/* ─── Entry content card ─────────────────────────────────────────────────── */
+.entryContent {
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 16px;
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  padding: 1.75rem 2rem;
+  transition: border-color 0.3s ease;
+}
+
+.entryContent:hover {
+  border-color: rgba(255, 107, 53, 0.3);
+}
+
+/* ─── Meta row ───────────────────────────────────────────────────────────── */
+.meta {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-bottom: 0.75rem;
+  flex-wrap: wrap;
+}
+
+.period {
+  font-size: 0.8rem;
+  color: rgba(255, 255, 255, 0.45);
+  font-weight: 500;
+  letter-spacing: 0.05em;
+}
+
+.badge {
+  font-size: 0.68rem;
+  font-weight: 700;
+  color: #ff6b35;
+  background: rgba(255, 107, 53, 0.12);
+  border: 1px solid rgba(255, 107, 53, 0.3);
+  border-radius: 100px;
+  padding: 0.2rem 0.65rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+/* ─── Role & company ─────────────────────────────────────────────────────── */
+.role {
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: #ffffff;
+  margin: 0 0 0.3rem;
+  line-height: 1.3;
+}
+
+.company {
+  font-size: 0.88rem;
+  color: rgba(255, 255, 255, 0.5);
+  margin: 0 0 1.25rem;
+}
+
+/* ─── Bullets ────────────────────────────────────────────────────────────── */
+.bullets {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+}
+
+.bullet {
+  position: relative;
+  padding-left: 1.25rem;
+  font-size: 0.92rem;
+  color: rgba(255, 255, 255, 0.65);
+  line-height: 1.6;
+}
+
+.bullet::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0.6em;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: rgba(255, 107, 53, 0.7);
+}
+
+/* ─── Responsive ─────────────────────────────────────────────────────────── */
+@media (max-width: 600px) {
+  .entry {
+    padding-left: 2rem;
+  }
+
+  .line {
+    left: 0;
+  }
+
+  .dot {
+    left: -5px;
+    width: 11px;
+    height: 11px;
+  }
+
+  .entryContent {
+    padding: 1.25rem 1.25rem;
+  }
+
+  .role {
+    font-size: 1rem;
+  }
+}

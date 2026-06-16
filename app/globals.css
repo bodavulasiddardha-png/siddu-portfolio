@@ -1,3 +1,16 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
+
+:root {
+  --orange: #ff6b35;
+  --blue: #4fc3f7;
+  --bg: #070707;
+  --card: rgba(255, 255, 255, 0.04);
+  --border: rgba(255, 255, 255, 0.08);
+  --text: rgba(255, 255, 255, 0.62);
+  --muted: rgba(255, 255, 255, 0.32);
+  --max: 1200px;
+}
+
 *,
 *::before,
 *::after {
@@ -6,52 +19,108 @@
   padding: 0;
 }
 
-:root {
-  --orange-warm: #ff6b35;
-  --orange-glow: #ff8c42;
-  --orange-dim: rgba(255, 107, 53, 0.6);
-  --dark-bg: #080808;
-}
-
 html {
-  overflow-x: hidden;
-  overflow-y: scroll; /* always show scrollbar, prevents layout shift */
+  overflow-y: scroll;
   scroll-behavior: smooth;
+  height: auto;
 }
 
 body {
-  width: 100%;
-  /* height: 100% intentionally omitted — it would clamp document height to viewport */
-  overflow-x: hidden;
-  background: var(--dark-bg);
+  background-color: var(--bg);
   color: #fff;
-  font-family: 'Inter', sans-serif;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  overflow-y: visible;
+  height: auto;
+  min-height: 100vh;
 }
 
-/* Custom scrollbar */
+/* Orange scrollbar */
 ::-webkit-scrollbar {
   width: 6px;
 }
+
 ::-webkit-scrollbar-track {
-  background: #111;
+  background: var(--bg);
 }
+
 ::-webkit-scrollbar-thumb {
-  background: var(--orange-warm);
+  background: var(--orange);
   border-radius: 3px;
 }
 
-/* Selection color */
+::-webkit-scrollbar-thumb:hover {
+  background: #ff8c5a;
+}
+
 ::selection {
-  background: rgba(255, 107, 53, 0.4);
+  background: var(--orange);
   color: #fff;
 }
 
-/* Remove default button styles */
+/* Button reset */
 button {
-  border: none;
   background: none;
+  border: none;
   cursor: pointer;
+  font-family: inherit;
+  color: inherit;
   outline: none;
+}
+
+/* Image reset */
+img {
+  display: block;
+  max-width: 100%;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+/* Section */
+.section {
+  padding: 7rem 2rem;
+}
+
+@media (max-width: 768px) {
+  .section {
+    padding: 4rem 1.5rem;
+  }
+}
+
+/* Container */
+.container {
+  max-width: var(--max);
+  margin: 0 auto;
+  padding: 0 1rem;
+}
+
+/* Section eyebrow */
+.section-eyebrow {
+  font-size: 0.7rem;
+  letter-spacing: 0.3em;
+  color: var(--orange);
+  text-transform: uppercase;
+  margin-bottom: 0.75rem;
+}
+
+/* Section title */
+.section-title {
+  font-size: clamp(2rem, 5vw, 3.2rem);
+  font-weight: 800;
+  line-height: 1.1;
+  margin-bottom: 3.5rem;
+}
+
+/* Glass card */
+.glass-card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  padding: 2rem;
 }
