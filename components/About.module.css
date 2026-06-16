@@ -1,234 +1,140 @@
-/* ─── About Section ─────────────────────────────────────────────────────── */
+/* ═══════════════════════════════════════════
+   ABOUT — Harsh Goyal Style
+   ═══════════════════════════════════════════ */
+
 .about {
-  background: #0a0a0a;
+  background: #080808;
+  padding: 6rem 3rem 7rem;
   width: 100%;
+  /* subtle dot-grid background like Harsh Goyal */
+  background-image:
+    radial-gradient(circle, rgba(255,255,255,0.04) 1px, transparent 1px);
+  background-size: 32px 32px;
+  background-color: #080808;
 }
 
 .container {
-  max-width: 1200px;
+  max-width: 900px;
   margin: 0 auto;
-  padding: 7rem 2rem;
-}
-
-/* ─── Header ─────────────────────────────────────────────────────────────── */
-.header {
-  text-align: center;
-  margin-bottom: 4rem;
-}
-
-.eyebrow {
-  display: inline-block;
-  font-size: 0.7rem;
-  letter-spacing: 0.3em;
-  color: #ff6b35;
-  text-transform: uppercase;
-  margin-bottom: 1rem;
-  font-weight: 600;
-}
-
-.title {
-  font-size: clamp(2rem, 5vw, 3.2rem);
-  font-weight: 800;
-  color: #ffffff;
-  margin: 0;
-  line-height: 1.15;
-}
-
-/* ─── Two-column grid ────────────────────────────────────────────────────── */
-.grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 3rem;
-  align-items: start;
-  margin-bottom: 4rem;
-}
-
-@media (max-width: 768px) {
-  .grid {
-    grid-template-columns: 1fr;
-    gap: 2rem;
-  }
-}
-
-/* ─── Profile card ───────────────────────────────────────────────────────── */
-.profileCard {
-  background: rgba(255, 255, 255, 0.04);
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  border-radius: 16px;
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
-  padding: 2.5rem 2rem;
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 1.5rem;
   text-align: center;
 }
 
-.monogram {
-  width: 80px;
-  height: 80px;
-  border-radius: 50%;
-  background: linear-gradient(135deg, #ff6b35 0%, #ff8c42 100%);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 1.8rem;
-  font-weight: 800;
-  color: #ffffff;
-  flex-shrink: 0;
+/* Massive heading */
+.heading {
+  font-size: clamp(4rem, 14vw, 11rem);
+  font-weight: 900;
   letter-spacing: -0.02em;
-}
-
-.nameBlock {
-  display: flex;
-  flex-direction: column;
-  gap: 0.75rem;
-  align-items: center;
-}
-
-.fullName {
-  font-size: 1.05rem;
-  font-weight: 700;
+  line-height: 0.9;
   color: #ffffff;
-  margin: 0;
-  line-height: 1.3;
+  text-transform: uppercase;
+  margin-bottom: 2.5rem;
+  opacity: 0;
+
+  text-shadow:
+    0 0 80px rgba(255, 107, 53, 0.25),
+    0 4px 40px rgba(0, 0, 0, 0.7);
 }
 
-.chips {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.5rem;
-  justify-content: center;
+/* Bio paragraph */
+.bio {
+  font-size: clamp(0.95rem, 1.6vw, 1.12rem);
+  font-weight: 400;
+  line-height: 1.8;
+  color: rgba(255, 255, 255, 0.72);
+  max-width: 680px;
+  margin-bottom: 4rem;
+  opacity: 0;
 }
 
-.chip {
-  font-size: 0.72rem;
+.bio strong {
+  color: #ffffff;
   font-weight: 600;
-  color: #ff6b35;
-  background: rgba(255, 107, 53, 0.12);
-  border: 1px solid rgba(255, 107, 53, 0.3);
-  border-radius: 100px;
-  padding: 0.25rem 0.75rem;
-  letter-spacing: 0.02em;
-}
-
-.quote {
-  font-style: italic;
-  font-size: 0.95rem;
-  color: rgba(255, 255, 255, 0.62);
-  border-left: 3px solid #ff6b35;
-  padding-left: 1rem;
-  margin: 0;
-  text-align: left;
-  line-height: 1.6;
-}
-
-/* ─── Bio content ────────────────────────────────────────────────────────── */
-.content {
-  display: flex;
-  flex-direction: column;
-  gap: 1.25rem;
-}
-
-.para {
-  font-size: 1rem;
-  color: rgba(255, 255, 255, 0.62);
-  line-height: 1.75;
-  margin: 0;
 }
 
 .link {
   color: #ff6b35;
   text-decoration: none;
   border-bottom: 1px solid rgba(255, 107, 53, 0.4);
-  transition: border-color 0.2s ease;
+  transition: border-color 0.2s;
 }
 
 .link:hover {
   border-color: #ff6b35;
 }
 
-.highlights {
-  list-style: none;
-  margin: 0.5rem 0 0;
-  padding: 0;
+/* Skill rows — label + pill row */
+.skillsTable {
+  width: 100%;
   display: flex;
   flex-direction: column;
-  gap: 0.75rem;
+  gap: 1.2rem;
+  text-align: left;
 }
 
-.highlight {
+.skillRow {
   display: flex;
   align-items: flex-start;
-  gap: 0.75rem;
-  font-size: 0.95rem;
-  color: rgba(255, 255, 255, 0.82);
-  line-height: 1.5;
+  gap: 2rem;
+  opacity: 0;
 }
 
-.dot {
-  display: inline-block;
-  width: 7px;
-  height: 7px;
-  border-radius: 50%;
-  background: #ff6b35;
+.catLabel {
   flex-shrink: 0;
-  margin-top: 0.45em;
+  width: 180px;
+  font-size: 0.6rem;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  color: rgba(255, 255, 255, 0.32);
+  text-transform: uppercase;
+  padding-top: 0.35rem;
 }
 
-/* ─── Stat cards ─────────────────────────────────────────────────────────── */
-.stats {
+.tags {
   display: flex;
-  flex-direction: row;
-  gap: 1.5rem;
-  justify-content: center;
   flex-wrap: wrap;
-}
-
-.statCard {
-  background: rgba(255, 255, 255, 0.04);
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  border-radius: 16px;
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
-  padding: 2rem 2.5rem;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
   gap: 0.5rem;
-  min-width: 160px;
-  flex: 1;
-  max-width: 220px;
-  transition: border-color 0.3s ease, transform 0.3s ease;
 }
 
-.statCard:hover {
-  border-color: rgba(255, 107, 53, 0.35);
-  transform: translateY(-4px);
-}
-
-.statNumber {
-  font-size: 2.8rem;
-  font-weight: 800;
-  color: #ff6b35;
-  line-height: 1;
-}
-
-.statLabel {
-  font-size: 0.85rem;
-  color: rgba(255, 255, 255, 0.62);
+.tag {
+  font-size: 0.72rem;
   font-weight: 500;
-  text-align: center;
+  color: rgba(255, 255, 255, 0.82);
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 100px;
+  padding: 0.3rem 0.85rem;
+  transition: background 0.2s, border-color 0.2s, color 0.2s;
+  cursor: default;
+  white-space: nowrap;
+}
+
+.tag:hover {
+  background: rgba(255, 107, 53, 0.12);
+  border-color: rgba(255, 107, 53, 0.35);
+  color: #ff8c5a;
+}
+
+/* ── Responsive ── */
+@media (max-width: 768px) {
+  .about {
+    padding: 4rem 1.5rem 5rem;
+  }
+
+  .skillRow {
+    flex-direction: column;
+    gap: 0.6rem;
+  }
+
+  .catLabel {
+    width: auto;
+  }
 }
 
 @media (max-width: 480px) {
-  .statCard {
-    min-width: 120px;
-    padding: 1.5rem 1.25rem;
-  }
-
-  .statNumber {
-    font-size: 2.2rem;
+  .heading {
+    font-size: clamp(3rem, 18vw, 5rem);
   }
 }
