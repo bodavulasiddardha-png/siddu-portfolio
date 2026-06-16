@@ -21,6 +21,23 @@ export default function Hero() {
   const [muted, setMuted] = useState(true)
   const [showBadge, setShowBadge] = useState(true)
 
+  /* ── Force page scroll unlock at runtime ── */
+  useEffect(() => {
+    const html = document.documentElement
+    const body = document.body
+    // Hard-reset any overflow that could clamp the document height
+    html.style.overflowY = 'scroll'
+    html.style.height = 'auto'
+    body.style.overflowY = 'visible'
+    body.style.height = 'auto'
+    return () => {
+      html.style.overflowY = ''
+      html.style.height = ''
+      body.style.overflowY = ''
+      body.style.height = ''
+    }
+  }, [])
+
   /* ── Three.js particles ── */
   useEffect(() => {
     const canvas = canvasRef.current
@@ -29,6 +46,8 @@ export default function Hero() {
     const renderer = new THREE.WebGLRenderer({ canvas, alpha: true, antialias: true })
     renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2))
     renderer.setSize(window.innerWidth, window.innerHeight)
+    // Ensure Three.js never re-enables pointer events on the canvas
+    canvas.style.pointerEvents = 'none'
 
     const scene = new THREE.Scene()
     const camera = new THREE.PerspectiveCamera(60, window.innerWidth / window.innerHeight, 0.1, 100)
