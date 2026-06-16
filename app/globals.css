@@ -13,22 +13,21 @@
   --dark-bg: #080808;
 }
 
-html,
+html {
+  overflow-x: hidden;
+  overflow-y: scroll; /* always show scrollbar, prevents layout shift */
+  scroll-behavior: smooth;
+}
+
 body {
   width: 100%;
-  /* Do NOT set height: 100% — it clamps the document and kills scroll */
+  /* height: 100% intentionally omitted — it would clamp document height to viewport */
   overflow-x: hidden;
-  overflow-y: auto;
   background: var(--dark-bg);
   color: #fff;
   font-family: 'Inter', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-}
-
-/* Smooth scrolling */
-html {
-  scroll-behavior: smooth;
 }
 
 /* Custom scrollbar */

@@ -5,11 +5,10 @@
 .hero {
   position: relative;
   width: 100vw;
-  /* Use min-height so content below can scroll into view */
   height: 100vh;
-  min-height: 100svh;
-  /* overflow: hidden only clips child absolute elements, not the page scroll */
-  overflow: clip;
+  overflow: hidden;
+  /* allow vertical pan on touch devices */
+  touch-action: pan-y;
   background: #070707;
   display: flex;
   align-items: center;
@@ -26,6 +25,7 @@
   filter: blur(40px) brightness(0.35) saturate(1.4);
   transform: scale(1.1); /* hide blur edge artefacts */
   z-index: 1;
+  pointer-events: none;
 }
 
 /* ── Foreground video (crisp, slightly letterboxed) ── */
@@ -37,6 +37,7 @@
   object-fit: cover;
   z-index: 2;
   opacity: 0.92;
+  pointer-events: none;
 }
 
 /* ── Three.js canvas ── */
