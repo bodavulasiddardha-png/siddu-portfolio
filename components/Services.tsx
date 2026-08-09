@@ -3,20 +3,19 @@
 import { motion } from 'framer-motion'
 import Reveal from './ui/Reveal'
 import SectionHeading from './ui/SectionHeading'
-import ContentNeeded from './ui/ContentNeeded'
 
 const SERVICES = [
   {
-    title: 'Website building',
-    body: '[Placeholder] — description of the website-building service: what’s included, typical stack, turnaround.',
+    title: 'AI Automation & Workflows',
+    body: 'n8n-based automation that connects your tools (Gmail, Telegram, APIs) and removes manual work: email triage, lead routing, content pipelines.',
   },
   {
-    title: 'AI automation workflows',
-    body: '[Placeholder] — description of n8n / automation work: what kinds of workflows, integrations, use cases.',
+    title: 'AI Chatbots & Agents',
+    body: 'Claude/LLM-powered agents that handle real tasks: classification, retrieval, routing — not just chat demos.',
   },
   {
-    title: 'Chatbot & agent development',
-    body: '[Placeholder] — description of chatbot/agent builds: platforms, RAG, LLM providers, deployment.',
+    title: 'Website Building',
+    body: 'From concept to deployed site — landing pages, business sites, portfolios.',
   },
 ]
 
@@ -27,12 +26,8 @@ export default function Services() {
         <SectionHeading
           eyebrow="For clients & businesses"
           title="Services"
-          description="[Placeholder] — one or two sentences on engagement model and how clients typically work with me."
+          description="Contact for quote — every engagement is project-based."
         />
-        <ContentNeeded>
-          exact service descriptions, pricing / engagement model, and which past projects to feature
-          here as proof.
-        </ContentNeeded>
       </Reveal>
 
       <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3 mt-12">

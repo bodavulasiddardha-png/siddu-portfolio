@@ -3,12 +3,32 @@
 import { motion } from 'framer-motion'
 import Reveal from './ui/Reveal'
 import SectionHeading from './ui/SectionHeading'
-import ContentNeeded from './ui/ContentNeeded'
 
 const GROUPS = [
-  { title: 'Data & Analytics', items: ['[Skill]', '[Skill]', '[Skill]', '[Skill]'] },
-  { title: 'AI Systems', items: ['[Skill]', '[Skill]', '[Skill]', '[Skill]'] },
-  { title: 'Automation', items: ['[Skill]', '[Skill]', '[Skill]', '[Skill]'] },
+  {
+    title: 'Data & Analytics',
+    items: [
+      'Excel (Pivot Tables, Power Query, XLOOKUP, DAX)',
+      'SQL',
+      'Power BI',
+      'Python (Pandas, NumPy)',
+      'Tableau',
+    ],
+  },
+  {
+    title: 'AI Systems',
+    items: [
+      'Embeddings & vector search',
+      'RAG pipelines',
+      'FastAPI',
+      'LLM/Claude API integration',
+      'Prompt & model evaluation',
+    ],
+  },
+  {
+    title: 'Automation',
+    items: ['n8n', 'API/webhook integration', 'GitHub Actions'],
+  },
 ]
 
 export default function Skills() {
@@ -16,7 +36,6 @@ export default function Skills() {
     <section id="skills" className="relative section-pad py-24 sm:py-32">
       <Reveal>
         <SectionHeading eyebrow="Capabilities" title="Skills" />
-        <ContentNeeded>the exact skill list per group below.</ContentNeeded>
       </Reveal>
 
       <div className="grid gap-6 md:grid-cols-3 mt-12">
@@ -29,7 +48,7 @@ export default function Skills() {
                   <motion.li
                     key={j}
                     whileHover={{ scale: 1.05 }}
-                    className="text-sm px-3 py-1.5 rounded-full border border-dashed border-surface-line text-muted"
+                    className="text-sm px-3 py-1.5 rounded-full border border-surface-line text-muted"
                   >
                     {item}
                   </motion.li>

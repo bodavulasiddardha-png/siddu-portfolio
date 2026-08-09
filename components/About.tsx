@@ -2,7 +2,6 @@
 
 import Reveal from './ui/Reveal'
 import SectionHeading from './ui/SectionHeading'
-import ContentNeeded from './ui/ContentNeeded'
 
 export default function About() {
   return (
@@ -15,17 +14,11 @@ export default function About() {
         <Reveal delay={0.1}>
           <div className="max-w-2xl space-y-4 text-muted leading-relaxed">
             <p>
-              [Placeholder] — a brief personal narrative connecting the operator background to the
-              technical building: how the path from operations / analysis work led into building AI
-              systems and automation.
+              CSE grad (Bharath University, 2026) who builds AI systems that ship — not demos.
+              Co-founded Edunova Consultancy, guiding students into engineering seats. I build
+              agents that route real mail, bots that post autonomously for months, pipelines meant
+              for production — not notebooks.
             </p>
-            <p>
-              [Placeholder] — second paragraph, if needed, covering what drives the work today.
-            </p>
-            <ContentNeeded>
-              exact wording for this narrative — no biographical facts, dates, or claims have been
-              invented.
-            </ContentNeeded>
           </div>
         </Reveal>
       </div>

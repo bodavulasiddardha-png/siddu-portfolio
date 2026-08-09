@@ -4,10 +4,11 @@ import { useState } from 'react'
 import { motion } from 'framer-motion'
 import Reveal from './ui/Reveal'
 import SectionHeading from './ui/SectionHeading'
-import ContentNeeded from './ui/ContentNeeded'
 
 const EMAIL = 'bodavulasiddardha@gmail.com'
 const GITHUB_URL = 'https://github.com/bodavulasiddardha-png'
+const PHONE = '+91 8374324110'
+const PHONE_HREF = 'tel:+918374324110'
 
 type Inquiry = 'project' | 'role'
 
@@ -69,6 +70,12 @@ export default function Contact() {
               Email me — {EMAIL}
             </a>
             <a
+              href={PHONE_HREF}
+              className="inline-flex w-fit items-center gap-2 text-sm text-muted hover:text-ink transition-colors"
+            >
+              Call — {PHONE}
+            </a>
+            <a
               href={GITHUB_URL}
               target="_blank"
               rel="noopener noreferrer"
@@ -77,12 +84,6 @@ export default function Contact() {
               GitHub ↗
             </a>
           </div>
-
-          <ContentNeeded>
-            confirm these are the contact details you want public (this email came from your account
-            profile, and the GitHub link was inferred from this repo&apos;s owner) — swap in a
-            different address / profile if you&apos;d rather use something else.
-          </ContentNeeded>
         </div>
       </Reveal>
     </section>
