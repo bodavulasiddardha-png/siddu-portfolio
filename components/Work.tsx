@@ -39,8 +39,8 @@ const PROJECTS = [
     body: 'Engineering admissions consultancy — built and deployed the platform, designed the outreach and content strategy end to end.',
     stack: ['Web platform', 'Ops design', 'Growth'],
     href: 'https://edunovaconsultancy.in',
-    image: '/images/work/edunova-logo.jpg',
-    lightPlate: true,
+    image: '/images/work/edunova-logo-transparent.png',
+    logoOnDark: true,
   },
 ]
 
@@ -63,14 +63,14 @@ export default function Work() {
               className="group h-full rounded-3xl border border-surface-line bg-surface p-8 flex flex-col"
             >
               <div className="relative aspect-video rounded-2xl border border-surface-line mb-6 overflow-hidden bg-surface-line/30">
-                {project.lightPlate ? (
-                  <div className="absolute inset-3 rounded-xl bg-white overflow-hidden">
+                {project.logoOnDark ? (
+                  <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_68%,rgba(255,165,56,0.28),rgba(15,18,32,0)_62%)] bg-surface">
                     <Image
                       src={project.image}
                       alt={`${project.title} logo`}
                       fill
                       sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
-                      className="object-contain p-4 transition-transform duration-500 ease-out group-hover:scale-105"
+                      className="object-contain p-8 transition-transform duration-500 ease-out group-hover:scale-105"
                     />
                   </div>
                 ) : (
