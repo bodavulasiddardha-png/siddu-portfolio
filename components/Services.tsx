@@ -1,6 +1,7 @@
 'use client'
 
 import { motion } from 'framer-motion'
+import { FlowArrow, Robot, Globe } from '@phosphor-icons/react/dist/ssr'
 import Reveal from './ui/Reveal'
 import SectionHeading from './ui/SectionHeading'
 
@@ -8,14 +9,17 @@ const SERVICES = [
   {
     title: 'AI Automation & Workflows',
     body: 'n8n-based automation that connects your tools (Gmail, Telegram, APIs) and removes manual work: email triage, lead routing, content pipelines.',
+    Icon: FlowArrow,
   },
   {
     title: 'AI Chatbots & Agents',
     body: 'Claude/LLM-powered agents that handle real tasks: classification, retrieval, routing — not just chat demos.',
+    Icon: Robot,
   },
   {
     title: 'Website Building',
     body: 'From concept to deployed site — landing pages, business sites, portfolios.',
+    Icon: Globe,
   },
 ]
 
@@ -38,8 +42,8 @@ export default function Services() {
               transition={{ type: 'spring', stiffness: 300, damping: 22 }}
               className="h-full rounded-3xl border border-surface-line bg-surface p-8"
             >
-              <div className="h-10 w-10 rounded-xl bg-violet/15 flex items-center justify-center text-violet-bright font-display text-lg">
-                {i + 1}
+              <div className="h-10 w-10 rounded-xl bg-amber/15 flex items-center justify-center text-amber-bright">
+                <service.Icon size={20} weight="regular" aria-hidden="true" />
               </div>
               <h3 className="font-display text-xl text-ink mt-6">{service.title}</h3>
               <p className="mt-3 text-sm text-muted leading-relaxed">{service.body}</p>

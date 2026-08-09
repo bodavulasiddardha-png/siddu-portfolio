@@ -1,12 +1,14 @@
 'use client'
 
 import { motion } from 'framer-motion'
+import { ChartBar, Brain, Lightning } from '@phosphor-icons/react/dist/ssr'
 import Reveal from './ui/Reveal'
 import SectionHeading from './ui/SectionHeading'
 
 const GROUPS = [
   {
     title: 'Data & Analytics',
+    Icon: ChartBar,
     items: [
       'Excel (Pivot Tables, Power Query, XLOOKUP, DAX)',
       'SQL',
@@ -17,6 +19,7 @@ const GROUPS = [
   },
   {
     title: 'AI Systems',
+    Icon: Brain,
     items: [
       'Embeddings & vector search',
       'RAG pipelines',
@@ -27,6 +30,7 @@ const GROUPS = [
   },
   {
     title: 'Automation',
+    Icon: Lightning,
     items: ['n8n', 'API/webhook integration', 'GitHub Actions'],
   },
 ]
@@ -42,7 +46,10 @@ export default function Skills() {
         {GROUPS.map((group, i) => (
           <Reveal key={group.title} delay={i * 0.1}>
             <div className="h-full rounded-3xl border border-surface-line bg-surface p-8">
-              <h3 className="font-display text-lg text-cyan-bright">{group.title}</h3>
+              <div className="h-9 w-9 rounded-lg bg-amber/15 flex items-center justify-center text-amber-bright mb-4">
+                <group.Icon size={18} weight="regular" aria-hidden="true" />
+              </div>
+              <h3 className="font-display text-lg text-amber-bright">{group.title}</h3>
               <ul className="mt-5 flex flex-wrap gap-2">
                 {group.items.map((item, j) => (
                   <motion.li

@@ -34,7 +34,7 @@
   }
 
   ::selection {
-    background: rgba(139, 107, 255, 0.35);
+    background: rgba(255, 165, 56, 0.35);
     color: #fff;
   }
 
@@ -45,7 +45,7 @@
     background: #0a0d18;
   }
   ::-webkit-scrollbar-thumb {
-    background: #5a3fc7;
+    background: #b5691a;
     border-radius: 4px;
   }
 

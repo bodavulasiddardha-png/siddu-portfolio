@@ -12,10 +12,10 @@ const config: Config = {
         ink: '#f4f5fb',
         muted: '#9aa1c2',
         'muted-dim': '#5c6284',
-        violet: {
-          DEFAULT: '#8b6bff',
-          bright: '#ab8fff',
-          dim: '#5a3fc7',
+        amber: {
+          DEFAULT: '#ffa538',
+          bright: '#ffc978',
+          dim: '#b5691a',
         },
         cyan: {
           DEFAULT: '#3fe7d6',
@@ -29,10 +29,10 @@ const config: Config = {
       },
       backgroundImage: {
         'grid-fade':
-          'linear-gradient(to bottom, transparent, rgba(5,6,11,1)), radial-gradient(ellipse at top, rgba(139,107,255,0.14), transparent 60%)',
+          'linear-gradient(to bottom, transparent, rgba(5,6,11,1)), radial-gradient(ellipse at top, rgba(255,165,56,0.16), transparent 60%)',
       },
       boxShadow: {
-        glow: '0 0 40px rgba(139,107,255,0.35)',
+        glow: '0 0 40px rgba(255,165,56,0.35)',
         'glow-cyan': '0 0 40px rgba(63,231,214,0.3)',
       },
       screens: {

@@ -8,7 +8,7 @@ const CARDS = [
     label: 'For clients & businesses',
     title: 'What I build for clients',
     body: 'Websites, AI automation workflows, and chatbot/agent systems that plug straight into how a business already runs.',
-    accent: 'violet' as const,
+    accent: 'amber' as const,
   },
   {
     label: 'For hiring teams',
@@ -37,7 +37,7 @@ export default function SplitIntro() {
             >
               <span
                 className={`inline-block text-[11px] tracking-[0.25em] uppercase font-semibold ${
-                  card.accent === 'violet' ? 'text-violet-bright' : 'text-cyan-bright'
+                  card.accent === 'amber' ? 'text-amber-bright' : 'text-cyan-bright'
                 }`}
               >
                 {card.label}

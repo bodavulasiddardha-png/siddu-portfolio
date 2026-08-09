@@ -55,7 +55,7 @@ export default function Work() {
               transition={{ type: 'spring', stiffness: 300, damping: 22 }}
               className="group h-full rounded-3xl border border-surface-line bg-surface p-8 flex flex-col"
             >
-              <div className="aspect-video rounded-2xl bg-gradient-to-br from-violet/25 via-violet/10 to-cyan/15 border border-surface-line mb-6 flex items-center justify-center">
+              <div className="aspect-video rounded-2xl bg-gradient-to-br from-amber/25 via-amber/10 to-cyan/15 border border-surface-line mb-6 flex items-center justify-center">
                 <span className="font-display text-3xl text-ink/70">
                   {project.title
                     .replace(/[@]/g, '')
@@ -79,7 +79,7 @@ export default function Work() {
                   </span>
                 ))}
               </div>
-              <span className="mt-5 inline-flex items-center gap-1 text-sm font-semibold text-violet-bright">
+              <span className="mt-5 inline-flex items-center gap-1 text-sm font-semibold text-amber-bright">
                 View project ↗
               </span>
             </motion.a>

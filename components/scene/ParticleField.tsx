@@ -5,8 +5,20 @@ import { useFrame } from '@react-three/fiber'
 import * as THREE from 'three'
 
 const COUNT = 1400
-const VIOLET = new THREE.Color('#8b6bff')
+const AMBER = new THREE.Color('#ffa538')
 const CYAN = new THREE.Color('#3fe7d6')
+
+function buildFlowSeeds(count: number) {
+  const seeds = new Float32Array(count * 4)
+  for (let i = 0; i < count; i++) {
+    const i4 = i * 4
+    seeds[i4] = Math.random() // phase x
+    seeds[i4 + 1] = Math.random() // phase y
+    seeds[i4 + 2] = Math.random() // phase z
+    seeds[i4 + 3] = 0.6 + Math.random() * 0.8 // per-particle speed/amplitude variance
+  }
+  return seeds
+}
 
 function buildChaos(count: number) {
   const positions = new Float32Array(count * 3)
@@ -78,8 +90,8 @@ export default function ParticleField({ progressRef, pointerRef, reducedMotion }
   const rotation = useRef(0)
   const dotTexture = useDotTexture()
 
-  const { chaos, lattice } = useMemo(
-    () => ({ chaos: buildChaos(COUNT), lattice: buildLattice(COUNT) }),
+  const { chaos, lattice, flowSeeds } = useMemo(
+    () => ({ chaos: buildChaos(COUNT), lattice: buildLattice(COUNT), flowSeeds: buildFlowSeeds(COUNT) }),
     []
   )
 
@@ -91,13 +103,33 @@ export default function ParticleField({ progressRef, pointerRef, reducedMotion }
 
   const target = useMemo(() => new Float32Array(COUNT * 3), [])
 
-  useFrame((_state, delta) => {
+  useFrame((state, delta) => {
     const pos = geometry.attributes.position as THREE.BufferAttribute
     const arr = pos.array as Float32Array
     const t = progressRef.current
+    const time = state.clock.elapsedTime
+    // Flow amplitude fades out as particles settle into the structured lattice,
+    // so the pre-scroll state reads as a drifting current rather than a static starfield.
+    const flowAmp = reducedMotion ? 0 : 0.4 * (1 - t)
 
-    for (let i = 0; i < arr.length; i++) {
-      target[i] = chaos[i] + (lattice[i] - chaos[i]) * t
+    for (let i = 0; i < COUNT; i++) {
+      const i3 = i * 3
+      const i4 = i * 4
+      let fx = 0
+      let fy = 0
+      let fz = 0
+      if (flowAmp > 0.001) {
+        const speed = flowSeeds[i4 + 3]
+        const px = flowSeeds[i4] * Math.PI * 2
+        const py = flowSeeds[i4 + 1] * Math.PI * 2
+        const pz = flowSeeds[i4 + 2] * Math.PI * 2
+        fx = Math.sin(time * 0.32 * speed + px) * flowAmp
+        fy = Math.cos(time * 0.26 * speed + py) * flowAmp * 0.85
+        fz = Math.sin(time * 0.21 * speed + pz) * flowAmp
+      }
+      target[i3] = chaos[i3] + (lattice[i3] - chaos[i3]) * t + fx
+      target[i3 + 1] = chaos[i3 + 1] + (lattice[i3 + 1] - chaos[i3 + 1]) * t + fy
+      target[i3 + 2] = chaos[i3 + 2] + (lattice[i3 + 2] - chaos[i3 + 2]) * t + fz
     }
 
     const lerpSpeed = reducedMotion ? 1 : Math.min(1, delta * 2.4)
@@ -107,7 +139,7 @@ export default function ParticleField({ progressRef, pointerRef, reducedMotion }
     pos.needsUpdate = true
 
     if (materialRef.current) {
-      materialRef.current.color.lerpColors(VIOLET, CYAN, t)
+      materialRef.current.color.lerpColors(AMBER, CYAN, t)
     }
 
     if (pointsRef.current && !reducedMotion) {
@@ -122,11 +154,11 @@ export default function ParticleField({ progressRef, pointerRef, reducedMotion }
       <pointsMaterial
         ref={materialRef}
         map={dotTexture}
-        size={0.09}
-        color="#8b6bff"
+        size={0.1}
+        color="#ffa538"
         sizeAttenuation
         transparent
-        opacity={0.9}
+        opacity={0.92}
         blending={THREE.AdditiveBlending}
         depthWrite={false}
       />

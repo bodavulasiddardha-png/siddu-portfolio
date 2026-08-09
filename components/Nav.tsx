@@ -14,12 +14,37 @@ const LINKS = [
 export default function Nav() {
   const [open, setOpen] = useState(false)
   const [scrolled, setScrolled] = useState(false)
+  const [progress, setProgress] = useState(0)
+  const [active, setActive] = useState('')
 
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 24)
+    const onScroll = () => {
+      setScrolled(window.scrollY > 24)
+      const doc = document.documentElement
+      const scrollable = doc.scrollHeight - doc.clientHeight
+      setProgress(scrollable > 0 ? window.scrollY / scrollable : 0)
+    }
     onScroll()
     window.addEventListener('scroll', onScroll, { passive: true })
     return () => window.removeEventListener('scroll', onScroll)
+  }, [])
+
+  useEffect(() => {
+    const sections = LINKS.map((link) => document.getElementById(link.href.slice(1))).filter(
+      (el): el is HTMLElement => Boolean(el)
+    )
+    if (sections.length === 0) return
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) setActive(`#${entry.target.id}`)
+        })
+      },
+      { rootMargin: '-40% 0px -50% 0px', threshold: 0 }
+    )
+    sections.forEach((section) => observer.observe(section))
+    return () => observer.disconnect()
   }, [])
 
   return (
@@ -28,12 +53,18 @@ export default function Nav() {
         scrolled ? 'bg-bg/80 backdrop-blur-md border-b border-surface-line' : ''
       }`}
     >
+      <div
+        className="fixed left-0 right-0 top-0 h-[2px] z-50 bg-gradient-to-r from-amber to-cyan origin-left transition-transform duration-150 ease-out motion-reduce:transition-none"
+        style={{ transform: `scaleX(${progress})` }}
+        aria-hidden="true"
+      />
+
       <div className="flex items-center justify-between py-5">
         <a
           href="#top"
           className="font-display text-lg tracking-tight text-ink hover:text-cyan transition-colors"
         >
-          Siddardha<span className="text-violet">.</span>
+          Siddardha<span className="text-amber">.</span>
         </a>
 
         <nav className="hidden md:flex items-center gap-8">
@@ -41,7 +72,10 @@ export default function Nav() {
             <a
               key={link.href}
               href={link.href}
-              className="text-sm text-muted hover:text-ink transition-colors"
+              aria-current={active === link.href ? 'true' : undefined}
+              className={`text-sm transition-colors ${
+                active === link.href ? 'text-cyan' : 'text-muted hover:text-ink'
+              }`}
             >
               {link.label}
             </a>
@@ -86,7 +120,10 @@ export default function Nav() {
                   key={link.href}
                   href={link.href}
                   onClick={() => setOpen(false)}
-                  className="px-4 py-3 text-sm text-muted hover:text-ink hover:bg-white/5 rounded-xl transition-colors"
+                  aria-current={active === link.href ? 'true' : undefined}
+                  className={`px-4 py-3 text-sm rounded-xl transition-colors hover:bg-white/5 ${
+                    active === link.href ? 'text-cyan' : 'text-muted hover:text-ink'
+                  }`}
                 >
                   {link.label}
                 </a>
