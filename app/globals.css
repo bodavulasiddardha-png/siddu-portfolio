@@ -1,57 +1,68 @@
-*,
-*::before,
-*::after {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  * {
+    @apply box-border;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+  }
+
+  html,
+  body {
+    @apply bg-bg text-ink font-body;
+    width: 100%;
+    overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    @apply font-display;
+  }
+
+  ::selection {
+    background: rgba(139, 107, 255, 0.35);
+    color: #fff;
+  }
+
+  ::-webkit-scrollbar {
+    width: 8px;
+  }
+  ::-webkit-scrollbar-track {
+    background: #0a0d18;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: #5a3fc7;
+    border-radius: 4px;
+  }
+
+  /* Visible keyboard focus states everywhere */
+  :focus-visible {
+    outline: 2px solid #3fe7d6;
+    outline-offset: 3px;
+    border-radius: 2px;
+  }
 }
 
-:root {
-  --orange-warm: #ff6b35;
-  --orange-glow: #ff8c42;
-  --orange-dim: rgba(255, 107, 53, 0.6);
-  --dark-bg: #080808;
-}
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
 
-html,
-body {
-  width: 100%;
-  height: 100%;
-  overflow-x: hidden;
-  background: var(--dark-bg);
-  color: #fff;
-  font-family: 'Inter', sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
-
-/* Smooth scrolling */
-html {
-  scroll-behavior: smooth;
-}
-
-/* Custom scrollbar */
-::-webkit-scrollbar {
-  width: 6px;
-}
-::-webkit-scrollbar-track {
-  background: #111;
-}
-::-webkit-scrollbar-thumb {
-  background: var(--orange-warm);
-  border-radius: 3px;
-}
-
-/* Selection color */
-::selection {
-  background: rgba(255, 107, 53, 0.4);
-  color: #fff;
-}
-
-/* Remove default button styles */
-button {
-  border: none;
-  background: none;
-  cursor: pointer;
-  outline: none;
+  .section-pad {
+    @apply px-6 sm:px-10 lg:px-20;
+  }
 }

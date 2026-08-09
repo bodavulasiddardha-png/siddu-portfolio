@@ -1,12 +1,29 @@
-import type { Metadata } from 'next'
-import { Inter } from 'next/font/google'
+import type { Metadata, Viewport } from 'next'
+import { Bricolage_Grotesque, Plus_Jakarta_Sans } from 'next/font/google'
 import './globals.css'
 
-const inter = Inter({ subsets: ['latin'] })
+const display = Bricolage_Grotesque({
+  subsets: ['latin'],
+  variable: '--font-display',
+  display: 'swap',
+})
+
+const body = Plus_Jakarta_Sans({
+  subsets: ['latin'],
+  variable: '--font-body',
+  display: 'swap',
+})
 
 export const metadata: Metadata = {
-  title: 'Siddardha Bodavula | Data Analyst · Business Analyst · AI Builder',
-  description: 'Portfolio of Siddardha Bodavula — turning data into decisions.',
+  title: 'Siddardha Bodavula — AI Builder & AI Associate',
+  description:
+    'Siddardha Bodavula builds AI-powered websites, automation workflows, and agents for clients — and brings the same systems thinking to data & AI roles.',
+}
+
+export const viewport: Viewport = {
+  themeColor: '#05060b',
+  width: 'device-width',
+  initialScale: 1,
 }
 
 export default function RootLayout({
@@ -15,8 +32,8 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="en">
-      <body className={inter.className}>{children}</body>
+    <html lang="en" className={`${display.variable} ${body.variable}`}>
+      <body>{children}</body>
     </html>
   )
 }

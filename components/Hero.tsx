@@ -1,265 +1,124 @@
 'use client'
 
-import { useEffect, useRef, useState, useCallback } from 'react'
-import * as THREE from 'three'
-import { gsap } from 'gsap'
-import styles from './Hero.module.css'
+import { useEffect, useRef } from 'react'
+import dynamic from 'next/dynamic'
+import { gsap, prefersReducedMotion } from '@/lib/gsap'
+
+const HeroScene = dynamic(() => import('./scene/HeroScene'), { ssr: false })
 
 export default function Hero() {
-  const containerRef = useRef<HTMLDivElement>(null)
-  const canvasRef = useRef<HTMLCanvasElement>(null)
-  const fgVideoRef = useRef<HTMLVideoElement>(null)
-  const bgVideoRef = useRef<HTMLVideoElement>(null)
-  const textRef = useRef<HTMLDivElement>(null)
   const roleRef = useRef<HTMLParagraphElement>(null)
   const nameRef = useRef<HTMLHeadingElement>(null)
   const taglineRef = useRef<HTMLParagraphElement>(null)
-  const muteRef = useRef<HTMLButtonElement>(null)
-  const badgeRef = useRef<HTMLDivElement>(null)
-  const scrollIndicatorRef = useRef<HTMLDivElement>(null)
+  const ctaRef = useRef<HTMLDivElement>(null)
+  const scrollHintRef = useRef<HTMLDivElement>(null)
 
-  const [muted, setMuted] = useState(true)
-  const [showBadge, setShowBadge] = useState(true)
-
-  /* ── Three.js particles ── */
   useEffect(() => {
-    const canvas = canvasRef.current
-    if (!canvas) return
+    const reduced = prefersReducedMotion()
+    const ctx = gsap.context(() => {
+      const tl = gsap.timeline({ delay: reduced ? 0 : 0.3 })
+      const dur = reduced ? 0.01 : undefined
 
-    const renderer = new THREE.WebGLRenderer({ canvas, alpha: true, antialias: true })
-    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2))
-    renderer.setSize(window.innerWidth, window.innerHeight)
-
-    const scene = new THREE.Scene()
-    const camera = new THREE.PerspectiveCamera(60, window.innerWidth / window.innerHeight, 0.1, 100)
-    camera.position.z = 5
-
-    /* Create particles */
-    const COUNT = 220
-    const positions = new Float32Array(COUNT * 3)
-    const velocities: { x: number; y: number; z: number }[] = []
-
-    for (let i = 0; i < COUNT; i++) {
-      const i3 = i * 3
-      positions[i3] = (Math.random() - 0.5) * 20
-      positions[i3 + 1] = (Math.random() - 0.5) * 12
-      positions[i3 + 2] = (Math.random() - 0.5) * 8
-      velocities.push({
-        x: (Math.random() - 0.5) * 0.004,
-        y: Math.random() * 0.006 + 0.002,
-        z: (Math.random() - 0.5) * 0.002,
-      })
-    }
-
-    const geometry = new THREE.BufferGeometry()
-    geometry.setAttribute('position', new THREE.BufferAttribute(positions, 3))
-
-    /* Warm orange palette */
-    const material = new THREE.PointsMaterial({
-      color: new THREE.Color('#ff7040'),
-      size: 0.055,
-      sizeAttenuation: true,
-      transparent: true,
-      opacity: 0.75,
-      blending: THREE.AdditiveBlending,
-      depthWrite: false,
+      tl.fromTo(
+        roleRef.current,
+        { opacity: 0, y: -16 },
+        { opacity: 1, y: 0, duration: dur ?? 1, ease: 'power3.out' }
+      )
+        .fromTo(
+          nameRef.current,
+          { opacity: 0, y: 60 },
+          { opacity: 1, y: 0, duration: dur ?? 1.2, ease: 'expo.out' },
+          reduced ? '<' : '-=0.6'
+        )
+        .fromTo(
+          taglineRef.current,
+          { opacity: 0, y: 24 },
+          { opacity: 1, y: 0, duration: dur ?? 0.9, ease: 'power2.out' },
+          reduced ? '<' : '-=0.5'
+        )
+        .fromTo(
+          ctaRef.current,
+          { opacity: 0, y: 24 },
+          { opacity: 1, y: 0, duration: dur ?? 0.9, ease: 'power2.out' },
+          reduced ? '<' : '-=0.5'
+        )
+        .fromTo(
+          scrollHintRef.current,
+          { opacity: 0 },
+          { opacity: 1, duration: dur ?? 0.8 },
+          reduced ? '<' : '-=0.3'
+        )
     })
 
-    const particles = new THREE.Points(geometry, material)
-    scene.add(particles)
-
-    let animId: number
-    const clock = new THREE.Clock()
-
-    const animate = () => {
-      animId = requestAnimationFrame(animate)
-      const pos = geometry.attributes.position as THREE.BufferAttribute
-      const arr = pos.array as Float32Array
-      const t = clock.getElapsedTime()
-
-      for (let i = 0; i < COUNT; i++) {
-        const i3 = i * 3
-        arr[i3] += velocities[i].x + Math.sin(t * 0.3 + i) * 0.0015
-        arr[i3 + 1] += velocities[i].y
-        arr[i3 + 2] += velocities[i].z
-
-        /* Wrap-around */
-        if (arr[i3 + 1] > 7) arr[i3 + 1] = -7
-        if (arr[i3] > 11) arr[i3] = -11
-        if (arr[i3] < -11) arr[i3] = 11
-      }
-      pos.needsUpdate = true
-
-      particles.rotation.y = t * 0.012
-      renderer.render(scene, camera)
-    }
-    animate()
-
-    const onResize = () => {
-      camera.aspect = window.innerWidth / window.innerHeight
-      camera.updateProjectionMatrix()
-      renderer.setSize(window.innerWidth, window.innerHeight)
-    }
-    window.addEventListener('resize', onResize)
-
-    return () => {
-      window.removeEventListener('resize', onResize)
-      cancelAnimationFrame(animId)
-      geometry.dispose()
-      material.dispose()
-      renderer.dispose()
-    }
-  }, [])
-
-  /* ── GSAP entrance animation ── */
-  useEffect(() => {
-    const role = roleRef.current
-    const name = nameRef.current
-    const tagline = taglineRef.current
-    const mute = muteRef.current
-    const scroll = scrollIndicatorRef.current
-
-    if (!role || !name || !tagline || !mute || !scroll) return
-
-    const tl = gsap.timeline({ delay: 0.4 })
-
-    tl.fromTo(
-      role,
-      { opacity: 0, letterSpacing: '0.6em', y: -20 },
-      { opacity: 1, letterSpacing: '0.25em', y: 0, duration: 1.2, ease: 'power3.out' }
-    )
-      .fromTo(
-        name,
-        { opacity: 0, y: 80, skewY: 4 },
-        { opacity: 1, y: 0, skewY: 0, duration: 1.4, ease: 'expo.out' },
-        '-=0.7'
-      )
-      .fromTo(
-        tagline,
-        { opacity: 0, y: 30 },
-        { opacity: 1, y: 0, duration: 1, ease: 'power2.out' },
-        '-=0.6'
-      )
-      .fromTo(
-        mute,
-        { opacity: 0, scale: 0.7 },
-        { opacity: 1, scale: 1, duration: 0.7, ease: 'back.out(1.7)' },
-        '-=0.4'
-      )
-      .fromTo(
-        scroll,
-        { opacity: 0, y: 10 },
-        { opacity: 1, y: 0, duration: 0.8, ease: 'power2.out' },
-        '-=0.3'
-      )
-  }, [])
-
-  /* ── Auto-hide "Tap for sound" badge ── */
-  useEffect(() => {
-    const timer = setTimeout(() => setShowBadge(false), 3000)
-    return () => clearTimeout(timer)
-  }, [])
-
-  /* ── Mute toggle ── */
-  const toggleMute = useCallback(() => {
-    setMuted((prev) => {
-      const next = !prev
-      if (fgVideoRef.current) fgVideoRef.current.muted = next
-      return next
-    })
-    setShowBadge(false)
+    return () => ctx.revert()
   }, [])
 
   return (
-    <section ref={containerRef} className={styles.hero}>
-      {/* Ambient blurred background video */}
-      <video
-        ref={bgVideoRef}
-        className={styles.bgVideo}
-        src="/hero-video.mp4"
-        autoPlay
-        loop
-        muted
-        playsInline
-        preload="auto"
-        aria-hidden="true"
-      />
+    <section
+      id="top"
+      className="relative h-[100dvh] w-full overflow-hidden bg-bg flex items-center"
+    >
+      <HeroScene />
 
-      {/* Foreground video */}
-      <video
-        ref={fgVideoRef}
-        className={styles.fgVideo}
-        src="/hero-video.mp4"
-        autoPlay
-        loop
-        muted
-        playsInline
-        preload="auto"
-      />
-
-      {/* Three.js particle canvas */}
-      <canvas ref={canvasRef} className={styles.canvas} aria-hidden="true" />
-
-      {/* Dark cinematic gradient overlay */}
-      <div className={styles.overlay} aria-hidden="true" />
-      <div className={styles.vignetteLeft} aria-hidden="true" />
-      <div className={styles.vignetteRight} aria-hidden="true" />
-
-      {/* Text content */}
-      <div ref={textRef} className={styles.content}>
-        <p ref={roleRef} className={styles.role}>
-          DATA ANALYST&nbsp;&nbsp;·&nbsp;&nbsp;BUSINESS ANALYST&nbsp;&nbsp;·&nbsp;&nbsp;AI BUILDER
-        </p>
-
-        <h1 ref={nameRef} className={styles.name}>
-          SIDDARDHA
-        </h1>
-
-        <p ref={taglineRef} className={styles.tagline}>
-          Turning Data into Decisions
-        </p>
-      </div>
-
-      {/* Mute / Unmute button */}
-      <button
-        ref={muteRef}
-        className={styles.muteBtn}
-        onClick={toggleMute}
-        aria-label={muted ? 'Unmute video' : 'Mute video'}
-      >
-        {muted ? (
-          /* Speaker muted icon */
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-            <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5" />
-            <line x1="23" y1="9" x2="17" y2="15" />
-            <line x1="17" y1="9" x2="23" y2="15" />
-          </svg>
-        ) : (
-          /* Speaker on icon */
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-            <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5" />
-            <path d="M15.54 8.46a5 5 0 0 1 0 7.07" />
-            <path d="M19.07 4.93a10 10 0 0 1 0 14.14" />
-          </svg>
-        )}
-      </button>
-
-      {/* Tap for sound badge */}
+      {/* Cinematic gradient overlay so text stays legible over the 3D scene */}
+      <div className="absolute inset-0 bg-grid-fade pointer-events-none" aria-hidden="true" />
       <div
-        ref={badgeRef}
-        className={`${styles.soundBadge} ${showBadge ? styles.soundBadgeVisible : styles.soundBadgeHidden}`}
+        className="absolute inset-0 bg-gradient-to-t from-bg via-transparent to-bg/40 pointer-events-none"
         aria-hidden="true"
-      >
-        <span className={styles.soundDot} />
-        Tap for sound
+      />
+
+      <div className="relative z-10 w-full section-pad">
+        <div className="max-w-4xl">
+          <p
+            ref={roleRef}
+            className="flex flex-wrap gap-x-3 gap-y-1 text-xs sm:text-sm tracking-[0.3em] text-cyan uppercase font-medium mb-6"
+          >
+            <span className="whitespace-nowrap">AI Builder</span>
+            <span className="whitespace-nowrap">· AI Associate</span>
+            <span className="whitespace-nowrap">· Data → Decisions</span>
+          </p>
+
+          <h1
+            ref={nameRef}
+            className="font-display text-[13vw] sm:text-6xl md:text-7xl lg:text-8xl leading-[0.95] tracking-tight text-ink text-balance"
+          >
+            Siddardha
+            <br />
+            Bodavula
+          </h1>
+
+          <p
+            ref={taglineRef}
+            className="mt-6 max-w-xl text-base sm:text-lg text-muted text-balance"
+          >
+            I build AI-powered websites, automation and agents for clients —
+            and bring the same systems thinking to data &amp; AI roles on a team.
+          </p>
+
+          <div ref={ctaRef} className="mt-10 flex flex-wrap items-center gap-4">
+            <a
+              href="#services"
+              className="inline-flex items-center rounded-full bg-violet px-6 py-3 text-sm font-semibold text-ink shadow-glow transition-transform hover:scale-[1.03] active:scale-[0.98]"
+            >
+              Hire me for a project
+            </a>
+            <a
+              href="#work"
+              className="inline-flex items-center rounded-full border border-surface-line px-6 py-3 text-sm font-semibold text-ink transition-colors hover:border-cyan hover:text-cyan"
+            >
+              Hiring for a role? See my work
+            </a>
+          </div>
+        </div>
       </div>
 
-      {/* Scroll indicator */}
-      <div ref={scrollIndicatorRef} className={styles.scrollIndicator} aria-label="Scroll down">
-        <span className={styles.scrollLabel}>SCROLL</span>
-        <div className={styles.scrollLine}>
-          <div className={styles.scrollDot} />
-        </div>
+      <div
+        ref={scrollHintRef}
+        className="absolute bottom-8 left-1/2 -translate-x-1/2 z-10 flex flex-col items-center gap-2 text-muted"
+        aria-hidden="true"
+      >
+        <span className="text-[10px] tracking-[0.3em] uppercase">Scroll</span>
+        <div className="h-8 w-px bg-gradient-to-b from-muted to-transparent motion-safe:animate-pulse" />
       </div>
     </section>
   )
