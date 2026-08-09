@@ -55,7 +55,7 @@ export default function HeroVideoCard() {
       initial={{ opacity: 0, y: 16 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ delay: 1.2, duration: 0.8, ease: 'easeOut' }}
-      className="absolute bottom-6 right-6 sm:bottom-8 sm:right-8 lg:bottom-10 lg:right-16 z-10 w-20 sm:w-32 md:w-40 lg:w-48 aspect-[3/4] rounded-2xl overflow-hidden border border-surface-line bg-surface shadow-glow"
+      className="absolute bottom-6 right-6 sm:bottom-8 sm:right-8 lg:bottom-10 lg:right-16 z-10 w-32 sm:w-44 md:w-56 lg:w-64 aspect-video rounded-2xl overflow-hidden border border-surface-line bg-surface shadow-glow"
     >
       {ready && !reduced ? (
         <video
@@ -74,7 +74,7 @@ export default function HeroVideoCard() {
           src={POSTER_SRC}
           alt="Siddardha Bodavula — intro"
           fill
-          sizes="(max-width: 640px) 5rem, (max-width: 768px) 8rem, 12rem"
+          sizes="(max-width: 640px) 8rem, (max-width: 768px) 11rem, 16rem"
           className="object-cover"
         />
       )}
