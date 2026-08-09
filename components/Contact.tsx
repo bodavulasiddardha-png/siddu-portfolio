@@ -7,8 +7,8 @@ import SectionHeading from './ui/SectionHeading'
 
 const EMAIL = 'bodavulasiddardha@gmail.com'
 const GITHUB_URL = 'https://github.com/bodavulasiddardha-png'
-const PHONE = '+91 8374324110'
-const PHONE_HREF = 'tel:+918374324110'
+const PHONE = '+91 8374234110'
+const PHONE_HREF = 'tel:+918374234110'
 
 type Inquiry = 'project' | 'role'
 
@@ -65,7 +65,7 @@ export default function Contact() {
           <div className="mt-8 flex flex-col gap-4">
             <a
               href={mailto}
-              className="inline-flex w-fit items-center gap-3 rounded-full bg-violet px-6 py-3 text-sm font-semibold text-ink shadow-glow transition-transform hover:scale-[1.03] active:scale-[0.98]"
+              className="inline-flex w-fit items-center gap-3 rounded-full bg-amber px-6 py-3 text-sm font-semibold text-bg shadow-glow transition-transform hover:scale-[1.03] active:scale-[0.98]"
             >
               Email me — {EMAIL}
             </a>

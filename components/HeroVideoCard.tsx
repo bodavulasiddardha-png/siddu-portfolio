@@ -55,7 +55,7 @@ export default function HeroVideoCard() {
       initial={{ opacity: 0, y: 16 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ delay: 1.2, duration: 0.8, ease: 'easeOut' }}
-      className="absolute bottom-6 right-6 sm:bottom-8 sm:right-8 lg:bottom-10 lg:right-16 z-10 w-32 sm:w-44 md:w-56 lg:w-64 aspect-video rounded-2xl overflow-hidden border border-surface-line bg-surface shadow-glow"
+      className="absolute bottom-6 right-6 sm:bottom-8 sm:right-8 lg:bottom-16 lg:right-16 z-10 w-40 sm:w-56 md:w-72 lg:w-[360px] aspect-video rounded-2xl overflow-hidden border border-surface-line bg-surface shadow-glow"
     >
       {ready && !reduced ? (
         <video
@@ -74,7 +74,7 @@ export default function HeroVideoCard() {
           src={POSTER_SRC}
           alt="Siddardha Bodavula — intro"
           fill
-          sizes="(max-width: 640px) 8rem, (max-width: 768px) 11rem, 16rem"
+          sizes="(max-width: 640px) 10rem, (max-width: 768px) 14rem, (max-width: 1024px) 18rem, 360px"
           className="object-cover"
         />
       )}
@@ -83,7 +83,7 @@ export default function HeroVideoCard() {
         <button
           onClick={toggleMute}
           aria-label={muted ? 'Unmute intro video' : 'Mute intro video'}
-          className="absolute bottom-2 right-2 h-7 w-7 sm:h-8 sm:w-8 rounded-full bg-bg/70 backdrop-blur flex items-center justify-center text-ink hover:bg-bg/90 transition-colors"
+          className="absolute bottom-2.5 right-2.5 sm:bottom-3 sm:right-3 h-8 w-8 sm:h-9 sm:w-9 rounded-full bg-bg/70 backdrop-blur flex items-center justify-center text-ink hover:bg-bg/90 hover:text-cyan transition-colors"
         >
           {muted ? <IconMuted /> : <IconSound />}
         </button>
@@ -94,7 +94,7 @@ export default function HeroVideoCard() {
 
 function IconMuted() {
   return (
-    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true">
       <path d="M4 9v6h4l5 5V4L8 9H4z" fill="currentColor" />
       <path
         d="M17 9l4 6M21 9l-4 6"
@@ -108,7 +108,7 @@ function IconMuted() {
 
 function IconSound() {
   return (
-    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true">
       <path d="M4 9v6h4l5 5V4L8 9H4z" fill="currentColor" />
       <path
         d="M16.5 8.5a5 5 0 0 1 0 7M19 6a8.5 8.5 0 0 1 0 12"

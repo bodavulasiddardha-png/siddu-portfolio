@@ -72,7 +72,7 @@ export default function Hero() {
         <div className="max-w-4xl">
           <p
             ref={roleRef}
-            className="flex flex-wrap gap-x-3 gap-y-1 text-xs sm:text-sm tracking-[0.3em] text-cyan uppercase font-medium mb-6"
+            className="flex flex-wrap gap-x-3 gap-y-1 text-xs sm:text-sm tracking-[0.3em] text-amber uppercase font-medium mb-6"
           >
             <span className="whitespace-nowrap">AI Builder</span>
             <span className="whitespace-nowrap">· AI Associate</span>
@@ -99,7 +99,7 @@ export default function Hero() {
           <div ref={ctaRef} className="mt-10 flex flex-wrap items-center gap-4">
             <a
               href="#services"
-              className="inline-flex items-center rounded-full bg-violet px-6 py-3 text-sm font-semibold text-ink shadow-glow transition-transform hover:scale-[1.03] active:scale-[0.98]"
+              className="inline-flex items-center rounded-full bg-amber px-6 py-3 text-sm font-semibold text-bg shadow-glow transition-transform hover:scale-[1.03] active:scale-[0.98]"
             >
               Hire me for a project
             </a>
