@@ -1,6 +1,12 @@
 'use client'
 
 import { motion } from 'framer-motion'
+import {
+  EnvelopeSimple,
+  Briefcase,
+  InstagramLogo,
+  Buildings,
+} from '@phosphor-icons/react/dist/ssr'
 import Reveal from './ui/Reveal'
 import SectionHeading from './ui/SectionHeading'
 
@@ -10,18 +16,24 @@ const PROJECTS = [
     body: 'An n8n workflow that watches incoming mail, classifies it with Claude, and routes labels + alerts automatically — no manual sorting.',
     stack: ['n8n', 'Claude API', 'Gmail Trigger'],
     href: 'https://github.com/bodavulasiddardha-png/N8N-Automation-Workflows',
+    Icon: EnvelopeSimple,
+    placeholderImage: 'Placeholder — mail/inbox theme',
   },
   {
     title: 'AI Job Match Bot',
     body: 'Pulls live listings via JSearch API, scores fit against a candidate profile using Claude, and pushes ranked matches straight to Telegram.',
     stack: ['n8n', 'JSearch API', 'Telegram'],
     href: 'https://github.com/bodavulasiddardha-png/N8N-Automation-Workflows',
+    Icon: Briefcase,
+    placeholderImage: 'Placeholder — job search theme',
   },
   {
     title: '@unknownbhaarath — autonomous Instagram bot',
     body: 'Fully hands-off carousel poster — cron trigger pulls facts, Claude Haiku writes captions, Puppeteer renders slides, and it posts on its own schedule. Live and running.',
     stack: ['GitHub Actions', 'Claude Haiku', 'Puppeteer', 'Cloudinary'],
     href: 'https://github.com/bodavulasiddardha-png/unknownbhaarath',
+    Icon: InstagramLogo,
+    placeholderImage: 'Placeholder — swap for the real profile picture',
   },
   {
     title: 'Driver Drowsiness Detection',
@@ -34,6 +46,8 @@ const PROJECTS = [
     body: 'Engineering admissions consultancy — built and deployed the platform, designed the outreach and content strategy end to end.',
     stack: ['Web platform', 'Ops design', 'Growth'],
     href: 'https://edunovaconsultancy.in',
+    Icon: Buildings,
+    placeholderImage: "Placeholder — swap for Edunova's real logo/banner",
   },
 ]
 
@@ -55,15 +69,24 @@ export default function Work() {
               transition={{ type: 'spring', stiffness: 300, damping: 22 }}
               className="group h-full rounded-3xl border border-surface-line bg-surface p-8 flex flex-col"
             >
-              <div className="aspect-video rounded-2xl bg-gradient-to-br from-amber/25 via-amber/10 to-cyan/15 border border-surface-line mb-6 flex items-center justify-center">
-                <span className="font-display text-3xl text-ink/70">
-                  {project.title
-                    .replace(/[@]/g, '')
-                    .split(' ')
-                    .slice(0, 2)
-                    .map((w) => w[0])
-                    .join('')}
-                </span>
+              <div className="relative aspect-video rounded-2xl bg-gradient-to-br from-amber/25 via-amber/10 to-cyan/15 border border-surface-line mb-6 flex items-center justify-center overflow-hidden">
+                {project.Icon ? (
+                  <project.Icon size={40} weight="light" className="text-ink/60" aria-hidden="true" />
+                ) : (
+                  <span className="font-display text-3xl text-ink/70">
+                    {project.title
+                      .replace(/[@]/g, '')
+                      .split(' ')
+                      .slice(0, 2)
+                      .map((w) => w[0])
+                      .join('')}
+                  </span>
+                )}
+                {project.placeholderImage && (
+                  <span className="absolute bottom-2 right-2 text-[10px] px-2 py-0.5 rounded-full bg-bg/70 backdrop-blur text-muted-dim uppercase tracking-wide">
+                    Placeholder
+                  </span>
+                )}
               </div>
               <h3 className="font-display text-xl text-ink group-hover:text-cyan-bright transition-colors">
                 {project.title}

@@ -1,11 +1,8 @@
 'use client'
 
 import { useEffect, useRef } from 'react'
-import dynamic from 'next/dynamic'
 import { gsap, prefersReducedMotion } from '@/lib/gsap'
-import HeroVideoCard from './HeroVideoCard'
-
-const HeroScene = dynamic(() => import('./scene/HeroScene'), { ssr: false })
+import HeroBackgroundVideo from './HeroBackgroundVideo'
 
 export default function Hero() {
   const roleRef = useRef<HTMLParagraphElement>(null)
@@ -59,17 +56,16 @@ export default function Hero() {
       id="top"
       className="relative h-[100dvh] w-full overflow-hidden bg-bg flex items-center"
     >
-      <HeroScene />
+      <HeroBackgroundVideo />
 
-      {/* Cinematic gradient overlay so text stays legible over the 3D scene */}
+      {/* Cinematic gradient overlay so text stays legible over the background video */}
       <div className="absolute inset-0 bg-grid-fade pointer-events-none" aria-hidden="true" />
       <div
-        className="absolute inset-0 bg-gradient-to-t from-bg via-transparent to-bg/40 pointer-events-none"
+        className="absolute inset-0 bg-bg/45 pointer-events-none"
         aria-hidden="true"
       />
-      {/* The hero object sits right-of-center; darken the left text column so it stays legible over it */}
       <div
-        className="absolute inset-0 bg-gradient-to-r from-bg from-0% via-bg/55 via-40% to-transparent to-72% pointer-events-none"
+        className="absolute inset-0 bg-gradient-to-t from-bg via-transparent to-bg/50 pointer-events-none"
         aria-hidden="true"
       />
 
@@ -126,8 +122,6 @@ export default function Hero() {
         <span className="text-[10px] tracking-[0.3em] uppercase">Scroll</span>
         <div className="h-8 w-px bg-gradient-to-b from-muted to-transparent motion-safe:animate-pulse" />
       </div>
-
-      <HeroVideoCard />
     </section>
   )
 }
