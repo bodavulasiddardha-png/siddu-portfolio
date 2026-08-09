@@ -1,3 +1,4 @@
+import IntroSequence from '@/components/IntroSequence'
 import Nav from '@/components/Nav'
 import Hero from '@/components/Hero'
 import SplitIntro from '@/components/SplitIntro'
@@ -11,6 +12,7 @@ import Footer from '@/components/Footer'
 export default function Home() {
   return (
     <>
+      <IntroSequence />
       <Nav />
       <main>
         <Hero />
