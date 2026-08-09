@@ -67,6 +67,11 @@ export default function Hero() {
         className="absolute inset-0 bg-gradient-to-t from-bg via-transparent to-bg/40 pointer-events-none"
         aria-hidden="true"
       />
+      {/* The hero object sits right-of-center; darken the left text column so it stays legible over it */}
+      <div
+        className="absolute inset-0 bg-gradient-to-r from-bg from-0% via-bg/55 via-40% to-transparent to-72% pointer-events-none"
+        aria-hidden="true"
+      />
 
       <div className="relative z-10 w-full section-pad">
         <div className="max-w-4xl">

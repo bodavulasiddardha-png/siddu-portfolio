@@ -2,7 +2,7 @@
 
 import { Suspense, useEffect, useRef, useState } from 'react'
 import { Canvas } from '@react-three/fiber'
-import ParticleField from './ParticleField'
+import HeroObject from './HeroObject'
 
 export default function HeroScene() {
   const progressRef = useRef(0)
@@ -45,7 +45,7 @@ export default function HeroScene() {
       gl={{ antialias: true, alpha: true, powerPreference: 'low-power' }}
     >
       <Suspense fallback={null}>
-        <ParticleField progressRef={progressRef} pointerRef={pointerRef} reducedMotion={reducedMotion} />
+        <HeroObject progressRef={progressRef} pointerRef={pointerRef} reducedMotion={reducedMotion} />
       </Suspense>
     </Canvas>
   )
