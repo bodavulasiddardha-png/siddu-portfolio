@@ -12,6 +12,8 @@ const PROJECTS = [
     stack: ['n8n', 'Claude API', 'Gmail Trigger'],
     href: 'https://github.com/bodavulasiddardha-png/N8N-Automation-Workflows',
     image: '/images/work/gmail-ai-triage-agent.png',
+    imageAlt:
+      'Illustration of the Gmail logo glowing above a data podium, with mail icons streaming around it, representing automated email triage',
   },
   {
     title: 'AI Job Match Bot',
@@ -19,6 +21,8 @@ const PROJECTS = [
     stack: ['n8n', 'JSearch API', 'Telegram'],
     href: 'https://github.com/bodavulasiddardha-png/N8N-Automation-Workflows',
     image: '/images/work/ai-job-match-bot.png',
+    imageAlt:
+      'Illustration of a friendly AI robot standing beside a ranked job-match results panel with star ratings',
   },
   {
     title: '@unknownbhaarath — autonomous Instagram bot',
@@ -26,6 +30,8 @@ const PROJECTS = [
     stack: ['GitHub Actions', 'Claude Haiku', 'Puppeteer', 'Cloudinary'],
     href: 'https://github.com/bodavulasiddardha-png/unknownbhaarath',
     image: '/images/work/unknownbhaarath-instagram-bot.png',
+    imageAlt:
+      'Illustration of the Instagram logo on a glowing podium, surrounded by content carousel cards and engagement icons',
   },
   {
     title: 'Driver Drowsiness Detection',
@@ -33,6 +39,8 @@ const PROJECTS = [
     stack: ['OpenCV', 'Computer Vision'],
     href: 'https://doi.org/10.15680/IJIRSET.2026.1505096',
     image: '/images/work/driver-drowsiness-detection.png',
+    imageAlt:
+      'Nighttime dashcam view of a highway with computer-vision bounding boxes tracking and labeling distances to nearby vehicles',
   },
   {
     title: 'Edunova Consultancy',
@@ -40,6 +48,7 @@ const PROJECTS = [
     stack: ['Web platform', 'Ops design', 'Growth'],
     href: 'https://edunovaconsultancy.in',
     image: '/images/work/edunova-logo-transparent.png',
+    imageAlt: 'Edunova Consultancy logo — a graduation cap mark beside the Edunova wordmark',
     logoOnDark: true,
   },
 ]
@@ -67,7 +76,7 @@ export default function Work() {
                   <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_68%,rgba(255,165,56,0.28),rgba(15,18,32,0)_62%)] bg-surface">
                     <Image
                       src={project.image}
-                      alt={`${project.title} logo`}
+                      alt={project.imageAlt}
                       fill
                       sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
                       className="object-contain p-8 transition-transform duration-500 ease-out group-hover:scale-105"
@@ -77,7 +86,7 @@ export default function Work() {
                   <>
                     <Image
                       src={project.image}
-                      alt={project.title}
+                      alt={project.imageAlt}
                       fill
                       sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
                       className="object-cover transition-transform duration-500 ease-out group-hover:scale-105"
