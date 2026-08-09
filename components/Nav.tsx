@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
+import { prefersReducedMotion } from '@/lib/gsap'
 
 const LINKS = [
   { href: '#work', label: 'Work' },
@@ -47,6 +48,33 @@ export default function Nav() {
     return () => observer.disconnect()
   }, [])
 
+  // Scroll explicitly instead of relying on the native anchor jump: on touch
+  // devices, closing the mobile menu inside onClick re-renders (and the
+  // AnimatePresence exit starts collapsing the dropdown) before the browser
+  // gets to run the touch-triggered click's default navigation, which
+  // silently drops the scroll. Doing it in JS removes that race entirely.
+  //
+  // The collapse animation itself also fights a smooth scrollIntoView called
+  // in the same tick — the shrinking header keeps shifting the target's
+  // position mid-animation, which cancels the scroll. So close the menu
+  // first and wait out its own transition before scrolling.
+  const goToSection = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
+    e.preventDefault()
+    const scroll = () => {
+      document.querySelector(href)?.scrollIntoView({
+        behavior: prefersReducedMotion() ? 'auto' : 'smooth',
+        block: 'start',
+      })
+    }
+
+    if (open) {
+      setOpen(false)
+      window.setTimeout(scroll, 320)
+    } else {
+      scroll()
+    }
+  }
+
   return (
     <header
       className={`fixed top-0 left-0 right-0 z-50 section-pad transition-colors duration-300 ${
@@ -72,6 +100,7 @@ export default function Nav() {
             <a
               key={link.href}
               href={link.href}
+              onClick={(e) => goToSection(e, link.href)}
               aria-current={active === link.href ? 'true' : undefined}
               className={`text-sm transition-colors ${
                 active === link.href ? 'text-cyan' : 'text-muted hover:text-ink'
@@ -119,7 +148,7 @@ export default function Nav() {
                 <a
                   key={link.href}
                   href={link.href}
-                  onClick={() => setOpen(false)}
+                  onClick={(e) => goToSection(e, link.href)}
                   aria-current={active === link.href ? 'true' : undefined}
                   className={`px-4 py-3 text-sm rounded-xl transition-colors hover:bg-white/5 ${
                     active === link.href ? 'text-cyan' : 'text-muted hover:text-ink'
