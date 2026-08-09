@@ -3,6 +3,7 @@
 import { useEffect, useRef } from 'react'
 import dynamic from 'next/dynamic'
 import { gsap, prefersReducedMotion } from '@/lib/gsap'
+import HeroVideoCard from './HeroVideoCard'
 
 const HeroScene = dynamic(() => import('./scene/HeroScene'), { ssr: false })
 
@@ -120,6 +121,8 @@ export default function Hero() {
         <span className="text-[10px] tracking-[0.3em] uppercase">Scroll</span>
         <div className="h-8 w-px bg-gradient-to-b from-muted to-transparent motion-safe:animate-pulse" />
       </div>
+
+      <HeroVideoCard />
     </section>
   )
 }
