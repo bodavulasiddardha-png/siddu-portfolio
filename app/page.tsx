@@ -14,7 +14,7 @@ export default function Home() {
     <>
       <IntroSequence />
       <Nav />
-      <main>
+      <main id="main-content" tabIndex={-1}>
         <Hero />
         <SplitIntro />
         <Services />

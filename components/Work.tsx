@@ -106,7 +106,7 @@ export default function Work() {
                 {project.stack.map((tag) => (
                   <span
                     key={tag}
-                    className="text-[11px] px-2.5 py-1 rounded-full border border-surface-line text-muted-dim"
+                    className="text-[11px] px-2.5 py-1 rounded-full border border-surface-line text-muted"
                   >
                     {tag}
                   </span>
