@@ -22,7 +22,7 @@ export default function SplitIntro() {
   return (
     <section className="relative section-pad py-24 sm:py-32">
       <Reveal>
-        <h2 className="text-xs tracking-[0.3em] uppercase text-muted-dim font-medium mb-4">
+        <h2 className="text-xs tracking-[0.3em] uppercase text-muted font-medium mb-4">
           One builder, two angles
         </h2>
       </Reveal>
