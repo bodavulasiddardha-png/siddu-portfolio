@@ -1,27 +1,18 @@
-'use client'
+import StackCard from './ui/StackCard'
 
-import Reveal from './ui/Reveal'
-import SectionHeading from './ui/SectionHeading'
-
-export default function About() {
+export default function About({ index }: { index: number }) {
   return (
-    <section id="about" className="relative section-pad py-24 sm:py-32 bg-bg-soft">
-      <div className="grid gap-12 lg:grid-cols-[1fr_1.4fr]">
-        <Reveal>
-          <SectionHeading eyebrow="Journey" title="About" />
-        </Reveal>
-
-        <Reveal delay={0.1}>
-          <div className="max-w-2xl space-y-4 text-muted leading-relaxed">
-            <p>
-              CSE grad (Bharath University, 2026) who builds AI systems that ship — not demos.
-              Co-founded Edunova Consultancy, guiding students into engineering seats. I build
-              agents that route real mail, bots that post autonomously for months, pipelines meant
-              for production — not notebooks.
-            </p>
-          </div>
-        </Reveal>
-      </div>
-    </section>
+    <StackCard id="about" index={index} label="Who I am" accent="warm">
+      <p className="font-display italic text-xl sm:text-2xl text-gradient mb-4 mt-6">A</p>
+      <p className="font-display text-2xl sm:text-3xl md:text-4xl leading-[1.3] text-ink text-balance max-w-3xl">
+        CSE grad <span className="text-muted">(Bharath University, 2026)</span> building AI agents
+        and automation systems for real production workloads —{' '}
+        <span className="text-gradient font-semibold">an email-triage agent</span> that classifies
+        and routes mail on its own, <span className="text-gradient font-semibold">a job-matching bot</span> that
+        scores live listings against a candidate profile, and{' '}
+        <span className="text-gradient font-semibold">a fully autonomous Instagram bot</span> that&apos;s
+        been posting unsupervised for months.
+      </p>
+    </StackCard>
   )
 }

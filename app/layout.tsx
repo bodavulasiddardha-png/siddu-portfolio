@@ -1,11 +1,13 @@
 import type { Metadata, Viewport } from 'next'
-import { Bricolage_Grotesque, Plus_Jakarta_Sans } from 'next/font/google'
+import { Fraunces, Plus_Jakarta_Sans } from 'next/font/google'
 import './globals.css'
 
-const display = Bricolage_Grotesque({
+const display = Fraunces({
   subsets: ['latin'],
   variable: '--font-display',
   display: 'swap',
+  weight: ['500', '600'],
+  style: ['normal', 'italic'],
 })
 
 const body = Plus_Jakarta_Sans({
@@ -15,9 +17,9 @@ const body = Plus_Jakarta_Sans({
 })
 
 const SITE_URL = 'https://siddu-portfolio-omega.vercel.app'
-const TITLE = 'Siddardha Bodavula — AI Builder & AI Associate'
+const TITLE = 'Siddardha Bodavula — AI Automation Builder & Agentic AI Engineer'
 const DESCRIPTION =
-  'Siddardha Bodavula builds AI-powered websites, automation workflows, and agents for clients — and brings the same systems thinking to data & AI roles.'
+  'Siddardha Bodavula builds AI agents, automation pipelines and agentic systems that ship to production — open to AI Automation, AI Engineer and Agentic AI roles.'
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
@@ -36,7 +38,7 @@ export const metadata: Metadata = {
         url: '/og-image.jpg',
         width: 1200,
         height: 630,
-        alt: 'Siddardha Bodavula — AI Builder & AI Associate',
+        alt: 'Siddardha Bodavula — AI Automation Builder & Agentic AI Engineer',
       },
     ],
   },
@@ -49,7 +51,7 @@ export const metadata: Metadata = {
 }
 
 export const viewport: Viewport = {
-  themeColor: '#05060b',
+  themeColor: '#0a0806',
   width: 'device-width',
   initialScale: 1,
 }
@@ -59,15 +61,10 @@ const personJsonLd = {
   '@type': 'Person',
   name: 'Siddardha Bodavula',
   alternateName: 'Bodavula Naga Venkata Siddardha',
-  jobTitle: 'AI Builder / AI Associate',
+  jobTitle: 'AI Automation Builder / Agentic AI Engineer',
   url: SITE_URL,
   sameAs: ['https://github.com/bodavulasiddardha-png'],
   knowsAbout: [
-    'Excel (Pivot Tables, Power Query, XLOOKUP, DAX)',
-    'SQL',
-    'Power BI',
-    'Python (Pandas, NumPy)',
-    'Tableau',
     'Embeddings & vector search',
     'RAG pipelines',
     'FastAPI',

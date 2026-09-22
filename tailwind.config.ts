@@ -5,35 +5,30 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        bg: '#05060b',
-        'bg-soft': '#0a0d18',
-        surface: '#0f1220',
-        'surface-line': '#1c2035',
-        ink: '#f4f5fb',
-        muted: '#9aa1c2',
-        'muted-dim': '#5c6284',
+        // Warm near-black + a single sepia/gold accent family.
+        bg: '#0a0806',
+        'bg-soft': '#120e09',
+        surface: '#171310',
+        'surface-line': '#2b241a',
+        ink: '#f5efe4',
+        muted: '#a89a85',
+        'muted-dim': '#6b5f4d',
         amber: {
-          DEFAULT: '#ffa538',
-          bright: '#ffc978',
-          dim: '#b5691a',
-        },
-        cyan: {
-          DEFAULT: '#3fe7d6',
-          bright: '#7ef6e9',
-          dim: '#1f8f83',
+          DEFAULT: '#d7b58c',
+          bright: '#ecd8b4',
+          dim: '#8c6f47',
         },
       },
       fontFamily: {
-        display: ['var(--font-display)', 'sans-serif'],
+        display: ['var(--font-display)', 'serif'],
         body: ['var(--font-body)', 'sans-serif'],
       },
       backgroundImage: {
         'grid-fade':
-          'linear-gradient(to bottom, transparent, rgba(5,6,11,1)), radial-gradient(ellipse at top, rgba(255,165,56,0.16), transparent 60%)',
+          'linear-gradient(to bottom, transparent, rgba(10,8,6,1)), radial-gradient(ellipse at top, rgba(215,181,140,0.14), transparent 60%)',
       },
       boxShadow: {
-        glow: '0 0 40px rgba(255,165,56,0.35)',
-        'glow-cyan': '0 0 40px rgba(63,231,214,0.3)',
+        glow: '0 0 40px rgba(215,181,140,0.3)',
       },
       screens: {
         xs: '420px',
